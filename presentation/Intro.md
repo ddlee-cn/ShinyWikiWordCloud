@@ -12,7 +12,7 @@ Usage
 
 Example
 ========================================================
-[Machine Learning]('https://en.wikipedia.org/wiki/Machine_learning') Page
+Machine Learning Page
 
 <img src="Intro-figure/unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" style="display: block; margin: auto;" />
 

@@ -12,7 +12,7 @@ Usage
 
 Example
 ========================================================
-[Machine Learning]('https://en.wikipedia.org/wiki/Machine_learning') Page
+Machine Learning Page
 
 ```{r message=FALSE, warning=FALSE, echo=FALSE, fig.align="center"}
 library(tm)

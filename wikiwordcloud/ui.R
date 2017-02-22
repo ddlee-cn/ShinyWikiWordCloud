@@ -1,16 +1,14 @@
-fluidPage(
+navbarPage("Wiki Word Cloud Builder",
   # Application title
-  titlePanel("Wiki Intro Word Cloud"),
-  
+
+  tabPanel("App",
   sidebarLayout(
     # Sidebar with a slider and selection inputs
     sidebarPanel(
       textInput("url","WIKI URL", value = "https://en.wikipedia.org/wiki/Machine_learning"),
       actionButton("goButton", "Go!"),
       hr(),
-      helpText("Paste a wikipedia page and find its world cloud in Introduction section."),
-      helpText("Not always work though, at your risk. Have fun!"),
-      helpText("Inspired by word cloud from Shiny Gallery."),
+      helpText("Just paste a wikipedia page and click the GO! button."),
       hr(),
       sliderInput("freq",
                   "Minimum Frequency:",
@@ -24,5 +22,14 @@ fluidPage(
     mainPanel(
       plotOutput("plot")
     )
+  )
+  ),
+  tabPanel("Documentation",
+           helpText("Usage"),
+           hr(),
+           helpText("Just Paste any wiki page and click the GO! button."),
+           helpText("Drag the slider to change min and max frequency of words"),
+           helpText("Not always work though, as not all html structure of wiki pages are exactly the same. Have fun!"),
+           helpText("Inspired by word cloud from Shiny Gallery.")
   )
 )
