@@ -1,0 +1,10 @@
+name: wikiwordcloud
+title:
+account: ddlee
+server: shinyapps.io
+appId: 158577
+bundleId: 720510
+url: https://ddlee.shinyapps.io/wikiwordcloud/
+when: 1487772789.13661
+asMultiple: FALSE
+asStatic: FALSE
