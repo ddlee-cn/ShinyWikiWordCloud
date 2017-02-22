@@ -1,0 +1,68 @@
+A Wikipedia word cloud visualizer
+========================================================
+author: David D. Lee
+date: 2017.02.22
+autosize: true
+
+Usage
+========================================================
+### - Just Paste any wiki page and click the GO! button.
+### - Drag the slider to change min and max frequency of words
+
+
+Example
+========================================================
+[Machine Learning]('https://en.wikipedia.org/wiki/Machine_learning') Page
+
+```{r message=FALSE, warning=FALSE, echo=FALSE, fig.align="center"}
+library(tm)
+library(SnowballC)
+library(memoise)
+library(rvest)
+library(wordcloud)
+
+url="https://en.wikipedia.org/wiki/Machine_learning"
+ht<-read_html(url)
+
+body<-ht %>%
+  html_nodes(xpath='//div/p[following-sibling::div[@id="toc"]]') %>%
+  html_text()
+
+text <- paste(body, collapse = '')
+
+# Build frequency matrix
+corpus = Corpus(VectorSource(text))
+corpus=tm_map(corpus, tolower)
+corpus=tm_map(corpus, PlainTextDocument)
+corpus=tm_map(corpus, removePunctuation)
+corpus=tm_map(corpus, removeWords, stopwords("english"))
+corpus=tm_map(corpus, stemDocument)
+dtm = TermDocumentMatrix(corpus,control=list(wordLengths=c(0,Inf)))
+spdtm<-removeSparseTerms(dtm, 0.95)
+
+m = as.matrix(spdtm)
+
+# Plot word cloud
+v<-sort(rowSums(m), decreasing = TRUE)
+
+wordcloud(names(v), v, scale=c(10,0.5),
+          min.freq = 2, max.words=Inf,
+          colors=brewer.pal(8, "Dark2"))
+```
+
+Code Structure
+========================================================
+### - global.R: *implements getTermMatrix() funciton, build corpus and get frequency matrix*
+### - ui.R: *get url input and output the plot*
+### - server.R: *get and parse html, pass it to getTermMatrix() function and plot the word cloud*
+
+Behind the Code
+========================================================
+## Required packages:
+### - tm: *text mining framework*
+### - SnowBallC: *build text corpus and frequency matrix (implements Porter's word stemming algorithm)*
+### - wordcloud: *plot word cloud*
+### - rvest: *get and parse html*
+### - memoise: *cache the results of a function*
+
+
